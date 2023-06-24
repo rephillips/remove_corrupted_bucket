@@ -3,6 +3,9 @@ remove corrupted bucket from indexer if there is no valid journal.gz file in the
 
 If you have already validate that no journal.gz file exists on any copy of the bucket across the index cluster you can proceed with the steps below.
 
+If there are copies of the bucket across the cluster which do have journal.gz files you can try and remove the copy of the bucket without the journal.gz file and let the cluster replicate another copy from one of the peers with a good copy.
+
+
 **This exercise is to remove corrupted buckets from peers:**
 
 
