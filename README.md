@@ -8,7 +8,16 @@ If you have already validate that no journal.gz file exists on any copy of the b
 
 **1.)** identify corrupted buckets with dbinspect:
 
+a.)
 ```| dbinspect index=_internal corruptonly=true | search state!=hot | table bucketId guId```
+
+
+b.) check splunkd.log for any events indicating journal.gz is missing:
+
+```index=_internal component=BucketReplicator "Could not find size of file" | stats dc(bid) AS bid by host | table host bid```
+
+```05-23-2023 17:03:12.159 +0000 ERROR BucketReplicator [16633 BucketReplicationThread] - Could not find size of file=/opt/sdata2/sendmail_syslog/colddb/rb_1673941043_1673940851_110_A558F492-468C-4422-BFE9-9A1F07FB5B40/rawdata/journal.gz for bid=sendmail_syslog~110~A558F492-468C-4422-BFE9-9A1F07FB5B40. stat() failed. No such file or directory```
+
 
 
 **2.)** create a file called bucket_guid.txt listing the bucket and guid of peer which holds the bucket on the cluster manager in $SPLUNK_HOME/bin
@@ -20,6 +29,12 @@ ie:
 ```_internal~77~E691AF05-67D7-45F8-814C-851F260B71B7	E3085D48-FB86-42F3-AC2A-0013AE02E36D```
 
 ```_internal~78~E691AF05-67D7-45F8-814C-851F260B71B7	E3085D48-FB86-42F3-AC2A-0013AE02E36D```
+
+
+note: You can obtain indexer to guid mapping by running the following search from the monitoring console (replace <label> with the label name of your index cluster):
+
+```| rest /services/server/info  splunk_server_group=dmc_group_indexer splunk_server_group=dmc_indexerclustergroup_<label>    | table splunk_server guid```
+
 
 **3.)** create remove_bucket.sh script on the cluster manager in $SPLUNK_HOME/bin
 
