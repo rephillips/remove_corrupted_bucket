@@ -36,6 +36,7 @@ done < bucket_guid.txt
 ```
 
 **4.)** put the CM into maintenance mode:
+
 ```./splunk enable maintenance-mode```
 
 **5.)** run the script to remove buckets from peer:
