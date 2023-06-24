@@ -1,7 +1,7 @@
 
 remove corrupted bucket from indexer if there is no valid journal.gz file in the bucket. A valid journal.gz file in the bucket is required to rebuild a bucket.
 
-If you have already validate that no journal.gz file exists on any copy of the bucket across the index cluster you can proceed with the steps below.
+If you have already validate that no journal.gz file exists on any copy of the bucket across the index cluster you can proceed with the steps below. Make sure to remove all copies of that bucket from the peers holding that copy to avoid having the cluster replicate a corrupted bucket again.
 
 If there are copies of the bucket across the cluster which do have journal.gz files you can try and remove the copy of the bucket without the journal.gz file and let the cluster replicate another copy from one of the peers with a good copy.
 
