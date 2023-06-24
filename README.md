@@ -20,7 +20,7 @@ b.) check splunkd.log for any events indicating journal.gz is missing:
 
 
 
-**2.)** create a file called bucket_guid.txt listing the bucket and guid of peer which holds the bucket on the cluster manager in $SPLUNK_HOME/bin
+**2.)** create a file called bucket_guid.txt listing the bucket and guid of peer which holds the bucket on the cluster manager in $SPLUNK_HOME/bin. These are the buckets and indexer guids where you will remove the buckets from the peer with the remove_from_peer curl command in step 3 below.
 
 ie:
 
