@@ -6,7 +6,7 @@ If you have already validate that no journal.gz file exists on any copy of the b
 **This exercise is to remove corrupted buckets from peers:**
 
 
-**1.)** identify corrupted buckets with dbinspect:
+**1.)** identify corrupted buckets:
 
 a.)
 ```| dbinspect index=_internal corruptonly=true | search state!=hot | table bucketId guId```
